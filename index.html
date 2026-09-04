@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión Avanzada y Tendencias en Calidad | ECOTEC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#0097A7;
+    --teal-dark:#00707d;
+    --teal-darker:#00565f;
+    --teal-light:#E0F7FA;
+    --teal-lighter:#F2FCFD;
+    --ink:#1E2B32;
+    --ink-soft:#4B5D66;
+    --gray-line:#E1E8EA;
+    --bg:#FFFFFF;
+    --ok:#1E8E5A;
+    --ok-bg:#E6F7EF;
+    --bad:#C0392B;
+    --bad-bg:#FBEAE8;
+    --radius:16px;
+    --radius-sm:10px;
+    --shadow:0 4px 18px rgba(0,60,66,0.08);
+    --shadow-sm:0 2px 8px rgba(0,60,66,0.06);
+    --maxw:920px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Poppins',sans-serif;
+    color:var(--ink);
+    margin:0 0 .5em 0;
+  }
+  p{margin:0 0 1em 0;}
+  img{max-width:100%;display:block;}
+  button{font-family:inherit;cursor:pointer;}
+  ::selection{background:var(--teal-light);}
+
+  /* ---------- HEADER ---------- */
+  .top-header{
+    background:linear-gradient(120deg,var(--teal) 0%,var(--teal-dark) 65%,var(--teal-darker) 100%);
+    color:#fff;
+    padding:22px 24px 26px;
+    text-align:center;
+  }
+  .top-header .inst{
+    font-size:.78rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    opacity:.85;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .top-header h1{
+    color:#fff;
+    font-size:clamp(1.3rem,3vw,1.9rem);
+    margin:0 0 6px 0;
+    font-weight:700;
+  }
+  .top-header .subt{
+    font-size:.95rem;
+    opacity:.92;
+    font-weight:500;
+  }
+  .top-header .instructor{
+    margin-top:10px;
+    font-size:.8rem;
+    opacity:.8;
+  }
+
+  /* ---------- NAV TABS ---------- */
+  .nav-wrap{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:#fff;
+    border-bottom:1px solid var(--gray-line);
+    box-shadow:0 2px 10px rgba(0,0,0,0.04);
+  }
+  .nav-tabs{
+    display:flex;
+    overflow-x:auto;
+    scrollbar-width:thin;
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 8px;
+  }
+  .nav-tabs::-webkit-scrollbar{height:5px;}
+  .nav-tabs::-webkit-scrollbar-thumb{background:var(--gray-line);border-radius:10px;}
+  .nav-tab{
+    flex:0 0 auto;
+    background:none;
+    border:none;
+    padding:14px 14px 12px;
+    font-size:.82rem;
+    font-weight:600;
+    color:var(--ink-soft);
+    border-bottom:3px solid transparent;
+    white-space:nowrap;
+    transition:color .15s, border-color .15s;
+  }
+  .nav-tab:hover{color:var(--teal-dark);}
+  .nav-tab.active{color:var(--teal-dark);border-bottom-color:var(--teal);}
+
+  .progress-outer{
+    height:3px;
+    background:var(--gray-line);
+    max-width:1100px;
+    margin:0 auto;
+  }
+  .progress-inner{
+    height:100%;
+    background:var(--teal);
+    transition:width .25s ease;
+  }
+
+  /* ---------- PAGES ---------- */
+  main{max-width:1100px;margin:0 auto;padding:0 20px;}
+  .page{display:none;padding:34px 0 20px;animation:fadeIn .35s ease;}
+  .page.active{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .page-inner{max-width:var(--maxw);margin:0 auto;}
+
+  .eyebrow{
+    display:inline-block;
+    font-size:.72rem;
+    font-weight:700;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--teal-dark);
+    background:var(--teal-light);
+    padding:5px 12px;
+    border-radius:20px;
+    margin-bottom:14px;
+  }
+  .page-title{font-size:clamp(1.4rem,3vw,2rem);font-weight:700;margin-bottom:14px;}
+  .lead{font-size:1.05rem;color:var(--ink-soft);}
+
+  .card{
+    background:#fff;
+    border:1px solid var(--gray-line);
+    border-radius:var(--radius);
+    padding:22px 24px;
+    box-shadow:var(--shadow-sm);
+    margin-bottom:18px;
+  }
+  .card-teal{background:var(--teal-lighter);border-color:var(--teal-light);}
+  .card h3{font-size:1.05rem;margin-bottom:8px;}
+  .card h3 .icon{margin-right:8px;}
+
+  .example-box{
+    background:var(--teal-lighter);
+    border-left:none;
+    border:1px solid var(--teal-light);
+    border-radius:var(--radius-sm);
+    padding:14px 18px;
+    font-size:.94rem;
+    color:var(--ink-soft);
+    margin:14px 0;
+  }
+  .example-box b{color:var(--teal-darker);}
+
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  @media(max-width:720px){
+    .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
+  }
+
+  .chip{
+    display:inline-block;
+    background:var(--teal-light);
+    color:var(--teal-darker);
+    font-size:.82rem;
+    font-weight:600;
+    padding:5px 12px;
+    border-radius:20px;
+    margin:3px 4px 3px 0;
+  }
+
+  .btn{
+    background:var(--teal);
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    padding:11px 20px;
+    font-size:.92rem;
+    font-weight:600;
+    transition:background .15s, transform .1s;
+  }
+  .btn:hover{background:var(--teal-dark);}
+  .btn:active{transform:scale(.97);}
+  .btn-outline{
+    background:#fff;
+    color:var(--teal-dark);
+    border:1.5px solid var(--teal);
+  }
+  .btn-outline:hover{background:var(--teal-lighter);}
+  .btn:disabled{opacity:.5;cursor:default;}
+
+  /* ---------- FOOTER NAV (prev/next) ---------- */
+  .footer-nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:26px;
+    padding-top:18px;
+    border-top:1px solid var(--gray-line);
+    max-width:var(--maxw);
+    margin-left:auto;margin-right:auto;
+  }
+  .footer-nav .page-count{font-size:.82rem;color:var(--ink-soft);font-weight:600;}
+
+  /* ---------- ACTIVITY LABEL ---------- */
+  .activity-tag{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:.78rem;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--teal-darker);
+    margin:26px 0 12px;
+  }
+  .activity-tag::before{
+    content:"";
+    width:22px;height:2px;background:var(--teal);
+    display:inline-block;
+  }
+
+  /* ---------- FLIP CARDS ---------- */
+  .flip-card{
+    perspective:1200px;
+    height:190px;
+  }
+  .flip-card-inner{
+    position:relative;width:100%;height:100%;
+    transition:transform .5s;
+    transform-style:preserve-3d;
+  }
+  .flip-card.flipped .flip-card-inner{transform:rotateY(180deg);}
+  .flip-front,.flip-back{
+    position:absolute;width:100%;height:100%;
+    backface-visibility:hidden;
+    border-radius:var(--radius);
+    padding:18px;
+    display:flex;flex-direction:column;justify-content:center;
+    cursor:pointer;
+  }
+  .flip-front{
+    background:var(--teal);
+    color:#fff;
+    text-align:center;
+    box-shadow:var(--shadow-sm);
+  }
+  .flip-front .fnum{font-size:.75rem;opacity:.8;font-weight:700;letter-spacing:.08em;margin-bottom:6px;}
+  .flip-front .ftitle{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.05rem;}
+  .flip-front .ftap{margin-top:auto;font-size:.72rem;opacity:.75;}
+  .flip-back{
+    background:#fff;
+    border:1.5px solid var(--teal);
+    color:var(--ink);
+    transform:rotateY(180deg);
+    font-size:.87rem;
+    overflow-y:auto;
+  }
+
+  /* ---------- QUIZ (multiple choice) ---------- */
+  .quiz-box{border:1px solid var(--gray-line);border-radius:var(--radius);padding:20px 22px;background:#fff;}
+  .quiz-score{
+    display:inline-block;
+    float:right;
+    font-size:.78rem;
+    font-weight:700;
+    color:var(--teal-darker);
+    background:var(--teal-light);
+    padding:4px 12px;
+    border-radius:20px;
+  }
+  .q-block{margin-bottom:20px;clear:both;}
+  .q-block:last-child{margin-bottom:0;}
+  .q-text{font-weight:600;margin-bottom:10px;font-size:.96rem;}
+  .q-options{display:flex;flex-direction:column;gap:8px;}
+  .q-opt{
+    text-align:left;
+    background:#fff;
+    border:1.5px solid var(--gray-line);
+    border-radius:10px;
+    padding:10px 14px;
+    font-size:.9rem;
+    color:var(--ink);
+    transition:border-color .15s,background .15s;
+  }
+  .q-opt:hover:not(:disabled){border-color:var(--teal);}
+  .q-opt.correct{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:600;}
+  .q-opt.incorrect{background:var(--bad-bg);border-color:var(--bad);color:var(--bad);font-weight:600;}
+  .q-explain{font-size:.85rem;color:var(--ink-soft);margin-top:8px;padding-left:2px;display:none;}
+  .q-explain.show{display:block;}
+
+  /* ---------- MATCHING GAME ---------- */
+  .match-wrap{display:flex;gap:14px;flex-wrap:wrap;}
+  .match-col{flex:1;min-width:220px;display:flex;flex-direction:column;gap:8px;}
+  .match-item{
+    background:#fff;
+    border:1.5px solid var(--gray-line);
+    border-radius:10px;
+    padding:10px 14px;
+    font-size:.88rem;
+    text-align:left;
+  }
+  .match-item.selected{border-color:var(--teal);background:var(--teal-lighter);}
+  .match-item.correct{border-color:var(--ok);background:var(--ok-bg);color:var(--ok);font-weight:600;}
+  .match-item.wrong{animation:shake .35s;}
+  .match-item:disabled{cursor:default;}
+  @keyframes shake{
+    0%,100%{transform:translateX(0);}
+    25%{transform:translateX(-5px);}
+    75%{transform:translateX(5px);}
+  }
+
+  /* ---------- SORT GAME ---------- */
+  .sort-item{border:1px solid var(--gray-line);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:10px;background:#fff;}
+  .sort-text{font-size:.9rem;margin-bottom:10px;}
+  .sort-btns{display:flex;gap:8px;}
+  .sort-btn{flex:1;border:1.5px solid var(--gray-line);background:#fff;border-radius:8px;padding:8px;font-size:.82rem;font-weight:600;color:var(--ink-soft);}
+  .sort-btn:hover:not(:disabled){border-color:var(--teal);}
+  .sort-btn.correct{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);}
+  .sort-btn.incorrect{background:var(--bad-bg);border-color:var(--bad);color:var(--bad);}
+  .sort-item.done .sort-btn:disabled{opacity:.55;}
+
+  /* ---------- TRUE/FALSE ---------- */
+  .tf-item{border:1px solid var(--gray-line);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:10px;}
+  .tf-text{font-size:.92rem;margin-bottom:10px;font-weight:500;}
+  .tf-btns{display:flex;gap:8px;margin-bottom:8px;}
+  .tf-btn{border:1.5px solid var(--gray-line);background:#fff;border-radius:8px;padding:7px 18px;font-size:.82rem;font-weight:700;color:var(--ink-soft);}
+  .tf-btn:hover:not(:disabled){border-color:var(--teal);}
+  .tf-btn.correct{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);}
+  .tf-btn.incorrect{background:var(--bad-bg);border-color:var(--bad);color:var(--bad);}
+
+  /* ---------- LAB (worksheet) ---------- */
+  .industry-btns{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+  .industry-btn{display:inline-flex;align-items:center;border:1.5px solid var(--gray-line);background:#fff;border-radius:20px;padding:8px 16px;font-size:.85rem;font-weight:600;color:var(--ink-soft);}
+  .industry-btn.active{background:var(--teal);border-color:var(--teal);color:#fff;}
+  textarea{
+    width:100%;
+    border:1.5px solid var(--gray-line);
+    border-radius:10px;
+    padding:12px 14px;
+    font-family:inherit;
+    font-size:.9rem;
+    resize:vertical;
+    min-height:70px;
+  }
+  textarea:focus{outline:none;border-color:var(--teal);}
+  label.field-label{font-size:.85rem;font-weight:700;color:var(--ink);display:block;margin:14px 0 6px;}
+  .summary-box{
+    display:none;
+    background:var(--teal-lighter);
+    border:1.5px dashed var(--teal);
+    border-radius:var(--radius-sm);
+    padding:16px 18px;
+    margin-top:16px;
+    font-size:.9rem;
+    white-space:pre-wrap;
+  }
+
+  /* ---------- BIBLIOGRAPHY ---------- */
+  .biblio-item{
+    display:flex;
+    gap:14px;
+    border:1px solid var(--gray-line);
+    border-radius:var(--radius-sm);
+    padding:14px 16px;
+    margin-bottom:10px;
+    font-size:.9rem;
+  }
+  .biblio-item .bnum{
+    flex:0 0 auto;
+    width:28px;height:28px;
+    border-radius:50%;
+    background:var(--teal-light);
+    color:var(--teal-darker);
+    font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    font-size:.82rem;
+  }
+
+  /* ---------- MISC ---------- */
+  ul.plain{margin:0 0 14px 0;padding-left:20px;}
+  ul.plain li{margin-bottom:6px;font-size:.95rem;}
+  .center{text-align:center;}
+  .small-note{font-size:.8rem;color:var(--ink-soft);text-align:center;margin-top:6px;}
+  .obj-check{
+    display:flex;gap:12px;align-items:flex-start;
+    border:1px solid var(--gray-line);
+    border-radius:var(--radius-sm);
+    padding:14px 16px;
+    margin-bottom:10px;
+    cursor:pointer;
+    transition:background .15s,border-color .15s;
+  }
+  .obj-check:hover{border-color:var(--teal);}
+  .obj-check.checked{background:var(--ok-bg);border-color:var(--ok);}
+  .obj-box{
+    flex:0 0 auto;width:22px;height:22px;border-radius:6px;
+    border:2px solid var(--gray-line);
+    display:flex;align-items:center;justify-content:center;
+    font-size:.8rem;color:#fff;font-weight:700;
+    margin-top:2px;
+  }
+  .obj-check.checked .obj-box{background:var(--ok);border-color:var(--ok);}
+  .agenda-card{
+    display:flex;align-items:center;gap:12px;
+    border:1px solid var(--gray-line);
+    border-radius:var(--radius-sm);
+    padding:12px 16px;margin-bottom:8px;
+    text-align:left;width:100%;background:#fff;
+    font-size:.9rem;font-weight:600;color:var(--ink);
+  }
+  .agenda-card:hover{border-color:var(--teal);background:var(--teal-lighter);}
+  .agenda-card .anum{
+    flex:0 0 auto;width:26px;height:26px;border-radius:50%;
+    background:var(--teal);color:#fff;font-size:.78rem;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  /* ---------- ICONS ---------- */
+  .icon{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle;flex-shrink:0;}
+  .icon-badge{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:42px;height:42px;border-radius:50%;
+    background:var(--teal-light);color:var(--teal-darker);
+    flex-shrink:0;
+  }
+  .icon-badge .icon{width:22px;height:22px;}
+  .icon-badge.sm{width:32px;height:32px;}
+  .icon-badge.sm .icon{width:17px;height:17px;}
+  .card-head{display:flex;align-items:center;gap:13px;margin-bottom:10px;}
+  .card-head h3{margin:0;}
+  .flip-front .ficon{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:1.6;margin-bottom:8px;}
+
+  /* ---------- HEADER DECORATION ---------- */
+  .top-header{position:relative;overflow:hidden;}
+  .top-header::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Ccircle cx='2' cy='2' r='1.4' fill='white'/%3E%3C/svg%3E");
+    background-size:26px 26px;
+    opacity:.16;
+  }
+  .top-header > *{position:relative;z-index:1;}
+
+  /* ---------- HERO (página de inicio) ---------- */
+  .hero-wrap{display:flex;justify-content:center;margin:6px 0 22px;}
+  .hero-wrap svg{width:100%;max-width:480px;height:auto;}
+  .pulse-dot{animation:pulseDot 2.4s ease-in-out infinite;}
+  .pulse-dot.d2{animation-delay:.6s;}
+  .pulse-dot.d3{animation-delay:1.2s;}
+  @keyframes pulseDot{
+    0%,100%{opacity:.25;r:3;}
+    50%{opacity:1;r:5;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .pulse-dot{animation:none;opacity:.8;}
+  }
+
+  /* ---------- EVOLUCIÓN: diagrama de flujo ---------- */
+  .evo-flow{display:flex;align-items:stretch;gap:10px;}
+  .evo-flow .card{flex:1;margin-bottom:0;}
+  .evo-arrow{display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:52px;color:var(--teal);}
+  .evo-arrow .icon{width:34px;height:34px;stroke-width:1.6;}
+  @media(max-width:720px){
+    .evo-flow{flex-direction:column;}
+    .evo-arrow{width:100%;height:40px;}
+    .evo-arrow .icon{transform:rotate(90deg);}
+  }
+
+  /* ---------- FUTURO: línea de tiempo ---------- */
+  .timeline-track{
+    position:relative;
+    display:flex;justify-content:space-between;
+    margin:0 6px 18px;
+    padding-top:10px;
+  }
+  .timeline-track::before{
+    content:"";position:absolute;top:19px;left:5%;right:5%;
+    border-top:2px dashed var(--teal-light);
+  }
+  .timeline-track .tdot{
+    position:relative;z-index:1;
+    width:18px;height:18px;border-radius:50%;
+    background:var(--teal);border:3px solid var(--teal-lighter);
+  }
+  @media(max-width:720px){.timeline-track{display:none;}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.3" y1="15.3" x2="20.5" y2="20.5"/></symbol>
+<symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="8 12.5 11 15.5 16 9"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 L19 6 V11 C19 15.8 16 19.3 12 20.7 C8 19.3 5 15.8 5 11 V6 Z"/><polyline points="9 11.5 11 13.5 15 9.2"/></symbol>
+<symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5"/><line x1="9" y1="2" x2="9" y2="6"/><line x1="15" y1="2" x2="15" y2="6"/><line x1="9" y1="18" x2="9" y2="22"/><line x1="15" y1="18" x2="15" y2="22"/><line x1="2" y1="9" x2="6" y2="9"/><line x1="2" y1="15" x2="6" y2="15"/><line x1="18" y1="9" x2="22" y2="9"/><line x1="18" y1="15" x2="22" y2="15"/></symbol>
+<symbol id="i-bar-chart" viewBox="0 0 24 24"><line x1="3" y1="21" x2="21" y2="21"/><rect x="5" y="13" width="4" height="8"/><rect x="10.5" y="8" width="4" height="13"/><rect x="16" y="4" width="4" height="17"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 L4 14 H11 L10 22 L20 10 H13 Z"/></symbol>
+<symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 16 A8 8 0 0 1 20 16"/><line x1="12" y1="16" x2="16" y2="10.5"/><circle cx="12" cy="16" r="1.4" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.2"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.5s-7-4.3-9.3-8.7C1.3 8.6 3 5.2 6.4 5.2c2 0 3.3 1.1 4.1 2.1c.8-1 2.1-2.1 4.1-2.1c3.4 0 5.1 3.4 3.7 6.6C19 16.2 12 20.5 12 20.5Z"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><circle cx="12" cy="15.3" r="1.3" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-scale" viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="19"/><line x1="4" y1="5" x2="20" y2="5"/><path d="M2 5 Q4 10.5 6 5"/><path d="M18 5 Q20 10.5 22 5"/><line x1="8" y1="21" x2="16" y2="21"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><line x1="3" y1="12" x2="21" y2="12"/></symbol>
+<symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3.5 17.5l3 3l5.8-5.8a4 4 0 0 0 5.4-5.4l-2.3 2.3a2 2 0 1 1-2.8-2.8Z"/></symbol>
+<symbol id="i-sliders" viewBox="0 0 24 24"><line x1="6" y1="4" x2="6" y2="20"/><circle cx="6" cy="9" r="2"/><line x1="12" y1="4" x2="12" y2="20"/><circle cx="12" cy="15" r="2"/><line x1="18" y1="4" x2="18" y2="20"/><circle cx="18" cy="7" r="2"/></symbol>
+<symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><line x1="12" y1="12" x2="18" y2="6"/></symbol>
+<symbol id="i-clipboard-check" viewBox="0 0 24 24"><rect x="5.5" y="4" width="13" height="17" rx="2"/><rect x="9" y="2" width="6" height="4" rx="1"/><polyline points="8.5 13 10.7 15.2 15 10.5"/></symbol>
+<symbol id="i-car" viewBox="0 0 24 24"><path d="M4 16 L5.2 10.8A2 2 0 0 1 7.1 9.3H16.9A2 2 0 0 1 18.8 10.8L20 16"/><rect x="2.5" y="16" width="19" height="3.6" rx="1"/><circle cx="7" cy="19.6" r="1.6"/><circle cx="17" cy="19.6" r="1.6"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11 L12 4 L20 11"/><path d="M6 11 V20 H18 V11"/><rect x="10" y="14.5" width="4" height="5.5"/></symbol>
+<symbol id="i-bank" viewBox="0 0 24 24"><path d="M4 10 L12 4 L20 10"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="6" y1="10" x2="6" y2="18"/><line x1="10.5" y1="10" x2="10.5" y2="18"/><line x1="13.5" y1="10" x2="13.5" y2="18"/><line x1="18" y1="10" x2="18" y2="18"/><line x1="3" y1="20" x2="21" y2="20"/></symbol>
+<symbol id="i-cross" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></symbol>
+<symbol id="i-cap" viewBox="0 0 24 24"><polygon points="12 4 22 9 12 14 2 9"/><path d="M7 11.2V16a5 2.6 0 0 0 10 0v-4.8"/><line x1="20" y1="9.5" x2="20" y2="15.5"/></symbol>
+<symbol id="i-truck" viewBox="0 0 24 24"><rect x="2" y="8" width="11" height="8.5"/><path d="M13 11h4l3 3v2.5h-7Z"/><circle cx="6.5" cy="18.3" r="1.7"/><circle cx="16.5" cy="18.3" r="1.7"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5.5 19C13.5 19 19 13.3 19 5.3c0 0-13.5 0-13.5 13.7Z"/><path d="M5.5 19c3-5.4 6-8.6 9-10.7"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.2c2-1 5-1 8 1c3-2 6-2 8-1V18c-2-1-5-1-8 1c-3-2-6-2-8-1Z"/><line x1="12" y1="6.2" x2="12" y2="19"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 4h10v5a5 5 0 0 1-10 0Z"/><path d="M7 5.5H4.5a2 2 0 0 0 0 4H7"/><path d="M17 5.5h2.5a2 2 0 0 1 0 4H17"/><line x1="12" y1="14" x2="12" y2="17.5"/><line x1="8.5" y1="19.5" x2="15.5" y2="19.5"/><line x1="9.5" y1="17.5" x2="14.5" y2="17.5"/></symbol>
+<symbol id="i-arrow-flow" viewBox="0 0 24 24"><line x1="3" y1="12" x2="19" y2="12"/><polyline points="14 6 20 12 14 18"/></symbol>
+</defs>
+</svg>
+
+<div class="top-header">
+  <div class="inst">Universidad Tecnológica ECOTEC</div>
+  <h1>Gestión Avanzada y Tendencias en Calidad</h1>
+  <div class="subt">Unidad 4 · Transformación digital y calidad</div>
+  <div class="instructor">Gestión de la Calidad — Ing. Marcela Medina B., M.Sc.</div>
+</div>
+
+<div class="nav-wrap">
+  <div class="nav-tabs" id="navTabs"></div>
+  <div class="progress-outer"><div class="progress-inner" id="progressBar"></div></div>
+</div>
+
+<main>
+<div class="page active" id="page-intro">
+  <div class="page-inner">
+    <span class="eyebrow">Bienvenida</span>
+    <h2 class="page-title">De controlar errores a construir experiencias</h2>
+    <p class="lead">Durante décadas, "calidad" fue sinónimo de cumplir una norma y evitar defectos. Hoy, en un mundo de apps, sensores y datos en tiempo real, esa definición se quedó corta: la calidad se vive, se experimenta y se actualiza constantemente.</p>
+
+    <div class="hero-wrap">
+      <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#0097A7" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <!-- engranaje: calidad clásica -->
+          <g transform="translate(110,130)">
+            <circle r="46"/>
+            <circle r="19"/>
+            <g stroke="#0097A7">
+              <rect x="-7" y="-64" width="14" height="20" rx="2" transform="rotate(0)"/>
+              <rect x="-7" y="-64" width="14" height="20" rx="2" transform="rotate(45)"/>
+              <rect x="-7" y="-64" width="14" height="20" rx="2" transform="rotate(90)"/>
+              <rect x="-7" y="-64" width="14" height="20" rx="2" transform="rotate(135)"/>
+              <rect x="-7" y="-64" width="14" height="20" rx="2" transform="rotate(180)"/>
+              <rect x="-7" y="-64" width="14" height="20" rx="2" transform="rotate(225)"/>
+              <rect x="-7" y="-64" width="14" height="20" rx="2" transform="rotate(270)"/>
+              <rect x="-7" y="-64" width="14" height="20" rx="2" transform="rotate(315)"/>
+            </g>
+          </g>
+          <!-- flujo de datos -->
+          <path d="M172 130 C 260 65, 340 195, 445 130" stroke-dasharray="2 8"/>
+          <!-- red digital -->
+          <g transform="translate(500,130)">
+            <line x1="0" y1="0" x2="-46" y2="-38"/>
+            <line x1="0" y1="0" x2="55" y2="-58"/>
+            <line x1="0" y1="0" x2="62" y2="-8"/>
+            <line x1="0" y1="0" x2="38" y2="55"/>
+            <line x1="0" y1="0" x2="-30" y2="52"/>
+            <circle cx="0" cy="0" r="11" fill="#0097A7" stroke="none"/>
+            <circle cx="-46" cy="-38" r="6" fill="#E0F7FA" stroke="#0097A7"/>
+            <circle cx="55" cy="-58" r="5" fill="#E0F7FA" stroke="#0097A7"/>
+            <circle cx="62" cy="-8" r="6.5" fill="#E0F7FA" stroke="#0097A7"/>
+            <circle cx="38" cy="55" r="5.5" fill="#E0F7FA" stroke="#0097A7"/>
+            <circle cx="-30" cy="52" r="5" fill="#E0F7FA" stroke="#0097A7"/>
+          </g>
+        </g>
+        <circle class="pulse-dot" cx="230" cy="94" r="3.5" fill="#0097A7"/>
+        <circle class="pulse-dot d2" cx="310" cy="150" r="3.5" fill="#0097A7"/>
+        <circle class="pulse-dot d3" cx="390" cy="103" r="3.5" fill="#0097A7"/>
+      </svg>
+    </div>
+
+    <div class="card card-teal">
+      <div class="card-head">
+        <span class="icon-badge"><svg class="icon"><use href="#i-search" xlink:href="#i-search"/></svg></span>
+        <h3>¿Por qué esta unidad importa?</h3>
+      </div>
+      <p>Empresas como Tesla, Airbnb o cualquier fintech ya no compiten solo por tener "cero defectos": compiten por la velocidad de sus actualizaciones, la confianza que generan y la experiencia que entregan en cada interacción digital. Esta unidad te lleva de la Calidad Clásica a la Calidad 4.0, y te prepara para diseñar soluciones de calidad en entornos altamente tecnológicos.</p>
+    </div>
+
+    <div class="activity-tag">Recorrido de la sesión</div>
+    <p style="font-size:.9rem;color:var(--ink-soft);margin-bottom:14px;">Toca cualquier tema para saltar directamente a esa sección. También puedes usar las pestañas de arriba o los botones al final de cada página.</p>
+    <div id="agendaList"></div>
+
+    <div class="footer-nav">
+      <button class="btn btn-outline" disabled>← Anterior</button>
+      <span class="page-count" data-pagecount="intro"></span>
+      <button class="btn" onclick="nextPage('intro')">Siguiente →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-objetivo">
+  <div class="page-inner">
+    <span class="eyebrow">Objetivo de la sesión</span>
+    <h2 class="page-title">Redefinir la calidad en clave digital</h2>
+    <p class="lead">Explorar cómo la transformación digital redefine el concepto de calidad, entendida ya no solo como cumplimiento, sino como experiencia, innovación y valor generado en entornos altamente tecnológicos.</p>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="icon-badge"><svg class="icon"><use href="#i-check-circle" xlink:href="#i-check-circle"/></svg></span>
+        <h3>Por tanto, al finalizar la sesión estarás en capacidad de:</h3>
+      </div>
+      <p style="font-size:.85rem;color:var(--ink-soft);margin-bottom:14px;">Marca cada punto conforme lo vayas comprendiendo durante la clase.</p>
+      <div class="obj-check">
+        <div class="obj-box"></div>
+        <div>Comprender cómo la transformación digital está redefiniendo el concepto de calidad.</div>
+      </div>
+      <div class="obj-check">
+        <div class="obj-box"></div>
+        <div>Diferenciar el enfoque de la Calidad Clásica (control y cumplimiento) del enfoque de la Calidad 4.0 (innovación, agilidad y experiencia del cliente).</div>
+      </div>
+      <div class="obj-check">
+        <div class="obj-box"></div>
+        <div>Reconocer los pilares, los nuevos indicadores y los retos de la calidad en entornos digitales.</div>
+      </div>
+      <div class="obj-check">
+        <div class="obj-box"></div>
+        <div>Aplicar estos conceptos diseñando una propuesta de mejora de calidad apoyada en tecnología.</div>
+      </div>
+    </div>
+
+    <div class="footer-nav">
+      <button class="btn btn-outline" onclick="prevPage('objetivo')">← Anterior</button>
+      <span class="page-count" data-pagecount="objetivo"></span>
+      <button class="btn" onclick="nextPage('objetivo')">Siguiente →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-calidad-digital">
+  <div class="page-inner">
+    <span class="eyebrow">Tema 1</span>
+    <h2 class="page-title">¿Qué significa calidad en la era digital?</h2>
+    <p>La calidad digital va más allá de la ausencia de errores. Se trata de la capacidad de una organización para entregar valor de forma continua, adaptándose a las expectativas cambiantes de los usuarios y aprovechando las tecnologías emergentes para optimizar cada interacción.</p>
+
+    <div class="example-box">
+      <b>Ejemplo:</b> en Spotify, la calidad no se mide solo en si la app "no falla". Se mide en si el algoritmo recomienda música que te gusta, si el cambio de canción es instantáneo y si la interfaz es intuitiva. Un usuario que no encuentra fácilmente su música favorita ya está viviendo un fallo de calidad, aunque no haya ningún error de código.
+    </div>
+
+    <p style="font-weight:600;margin-bottom:8px;">Se enfoca en:</p>
+    <div style="margin-bottom:8px;">
+      <span class="chip">Experiencia del usuario (UX)</span>
+      <span class="chip">Agilidad y adaptabilidad</span>
+      <span class="chip">Seguridad y privacidad de datos</span>
+      <span class="chip">Automatización e inteligencia artificial</span>
+    </div>
+
+    <div class="activity-tag">Actividad · Relaciona cada foco con su descripción</div>
+    <div class="quiz-box" id="matchCalidad"></div>
+
+    <div class="footer-nav">
+      <button class="btn btn-outline" onclick="prevPage('calidad-digital')">← Anterior</button>
+      <span class="page-count" data-pagecount="calidad-digital"></span>
+      <button class="btn" onclick="nextPage('calidad-digital')">Siguiente →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-evolucion">
+  <div class="page-inner">
+    <span class="eyebrow">Tema 2</span>
+    <h2 class="page-title">De la Calidad Clásica a la Calidad 4.0</h2>
+
+    <div class="evo-flow">
+      <div class="card">
+        <div class="card-head">
+          <span class="icon-badge sm"><svg class="icon"><use href="#i-clipboard-check" xlink:href="#i-clipboard-check"/></svg></span>
+          <h3>Calidad Clásica</h3>
+        </div>
+        <ul class="plain">
+          <li>Enfoque en procesos y cumplimiento de estándares (ISO, Six Sigma).</li>
+          <li>Control de defectos post-producción.</li>
+          <li>Documentación exhaustiva.</li>
+          <li>Jerárquica y reactiva.</li>
+        </ul>
+      </div>
+      <div class="evo-arrow"><svg class="icon"><use href="#i-arrow-flow" xlink:href="#i-arrow-flow"/></svg></div>
+      <div class="card card-teal">
+        <div class="card-head">
+          <span class="icon-badge sm"><svg class="icon"><use href="#i-bolt" xlink:href="#i-bolt"/></svg></span>
+          <h3>Calidad 4.0</h3>
+        </div>
+        <ul class="plain">
+          <li>Enfoque en la experiencia del cliente y co-creación de valor.</li>
+          <li>Prevención de defectos mediante datos y analítica predictiva.</li>
+          <li>Automatización y optimización continua.</li>
+          <li>Ágil y proactiva, impulsada por tecnología.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>La Calidad 4.0 integra big data, IA, IoT y automatización para una gestión de la calidad más inteligente y predictiva. No reemplaza a la Calidad Clásica: la evoluciona, pasando de "detectar y corregir" a "prevenir y optimizar".</p>
+
+    <div class="activity-tag">Actividad · Clasifica cada situación</div>
+    <div class="quiz-box" id="sortEvolucion"></div>
+
+    <div class="footer-nav">
+      <button class="btn btn-outline" onclick="prevPage('evolucion')">← Anterior</button>
+      <span class="page-count" data-pagecount="evolucion"></span>
+      <button class="btn" onclick="nextPage('evolucion')">Siguiente →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-pilares">
+  <div class="page-inner">
+    <span class="eyebrow">Tema 3</span>
+    <h2 class="page-title">Pilares de la Calidad 4.0</h2>
+    <p style="font-size:.85rem;color:var(--ink-soft);">Toca cada tarjeta para descubrir de qué se trata cada pilar.</p>
+
+    <div class="grid-4" style="margin-bottom:24px;">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="fnum">PILAR 1</div>
+            <svg class="ficon"><use href="#i-shield" xlink:href="#i-shield"/></svg>
+            <div class="ftitle">Ciberseguridad Integrada</div>
+            <div class="ftap">Toca para ver más</div>
+          </div>
+          <div class="flip-back">La protección de datos y sistemas es un pilar fundamental, no un añadido. Un fallo de seguridad es, directamente, un fallo de calidad.</div>
+        </div>
+      </div>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="fnum">PILAR 2</div>
+            <svg class="ficon"><use href="#i-cpu" xlink:href="#i-cpu"/></svg>
+            <div class="ftitle">Automatización Inteligente</div>
+            <div class="ftap">Toca para ver más</div>
+          </div>
+          <div class="flip-back">Uso de IA y robótica para procesos de control y mejora continua: sensores que detectan desviaciones y corrigen el proceso automáticamente.</div>
+        </div>
+      </div>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="fnum">PILAR 3</div>
+            <svg class="ficon"><use href="#i-bar-chart" xlink:href="#i-bar-chart"/></svg>
+            <div class="ftitle">Análisis de Big Data</div>
+            <div class="ftap">Toca para ver más</div>
+          </div>
+          <div class="flip-back">Toma de decisiones basada en datos masivos para identificar patrones y tendencias, en lugar de intuiciones.</div>
+        </div>
+      </div>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="fnum">PILAR 4</div>
+            <svg class="ficon"><use href="#i-bolt" xlink:href="#i-bolt"/></svg>
+            <div class="ftitle">Cultura de la Agilidad</div>
+            <div class="ftap">Toca para ver más</div>
+          </div>
+          <div class="flip-back">Capacidad de adaptarse rápidamente a los cambios del mercado y las necesidades del cliente, con equipos multifuncionales.</div>
+        </div>
+      </div>
+    </div>
+
+    <p>Estos principios aseguran que la calidad se construya en cada etapa del ciclo de vida digital, no solo al final.</p>
+
+    <div class="activity-tag">Actividad · ¿Qué pilar aplica en cada caso?</div>
+    <div class="quiz-box" id="quizPilares"></div>
+
+    <div class="footer-nav">
+      <button class="btn btn-outline" onclick="prevPage('pilares')">← Anterior</button>
+      <span class="page-count" data-pagecount="pilares"></span>
+      <button class="btn" onclick="nextPage('pilares')">Siguiente →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-indicadores">
+  <div class="page-inner">
+    <span class="eyebrow">Tema 4</span>
+    <h2 class="page-title">Nuevos indicadores de calidad en entornos digitales</h2>
+    <p>No basta con "defectos por millón": la economía digital exige métricas que reflejen la experiencia digital.</p>
+
+    <div class="grid-2" style="margin-bottom:20px;">
+      <div class="card">
+        <div class="card-head"><span class="icon-badge sm"><svg class="icon"><use href="#i-gauge" xlink:href="#i-gauge"/></svg></span><h3>Velocidad</h3></div>
+        <p style="margin:0;font-size:.9rem;">Tiempo de respuesta, tiempo de lanzamiento al mercado.</p>
+      </div>
+      <div class="card">
+        <div class="card-head"><span class="icon-badge sm"><svg class="icon"><use href="#i-target" xlink:href="#i-target"/></svg></span><h3>Personalización</h3></div>
+        <p style="margin:0;font-size:.9rem;">Nivel de adaptación de productos/servicios a las necesidades individuales.</p>
+      </div>
+      <div class="card">
+        <div class="card-head"><span class="icon-badge sm"><svg class="icon"><use href="#i-heart" xlink:href="#i-heart"/></svg></span><h3>Experiencia</h3></div>
+        <p style="margin:0;font-size:.9rem;">Satisfacción del usuario, facilidad de uso, Net Promoter Score (NPS).</p>
+      </div>
+      <div class="card">
+        <div class="card-head"><span class="icon-badge sm"><svg class="icon"><use href="#i-lock" xlink:href="#i-lock"/></svg></span><h3>Seguridad</h3></div>
+        <p style="margin:0;font-size:.9rem;">Vulnerabilidades y cumplimiento de normativas de privacidad.</p>
+      </div>
+    </div>
+
+    <p>Estos indicadores son cruciales para medir el éxito en la economía digital.</p>
+
+    <div class="activity-tag">Actividad · Une cada indicador con su ejemplo real</div>
+    <div class="quiz-box" id="matchIndicadores"></div>
+
+    <div class="footer-nav">
+      <button class="btn btn-outline" onclick="prevPage('indicadores')">← Anterior</button>
+      <span class="page-count" data-pagecount="indicadores"></span>
+      <button class="btn" onclick="nextPage('indicadores')">Siguiente →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-retos">
+  <div class="page-inner">
+    <span class="eyebrow">Tema 5</span>
+    <h2 class="page-title">Retos y dilemas de la calidad digital</h2>
+    <p>La transformación digital no viene sin tensiones. Estos tres dilemas son centrales para construir un futuro digital confiable y equitativo.</p>
+
+    <div class="card">
+      <div class="card-head"><span class="icon-badge"><svg class="icon"><use href="#i-scale" xlink:href="#i-scale"/></svg></span><h3>Ética de la inteligencia artificial</h3></div>
+      <p style="margin:0;">Cuando los algoritmos deciden (por ejemplo, para conceder un préstamo o una contratación), pueden arrastrar sesgos. ¿Quién es responsable si un algoritmo se equivoca? ¿Cómo garantizamos transparencia?</p>
+    </div>
+    <div class="card">
+      <div class="card-head"><span class="icon-badge"><svg class="icon"><use href="#i-shield" xlink:href="#i-shield"/></svg></span><h3>Ciberseguridad</h3></div>
+      <p style="margin:0;">La tecnología avanza, pero los ataques también se sofistican. Esto exige inversión constante en protección y una cultura de seguridad dentro de la organización.</p>
+    </div>
+    <div class="card">
+      <div class="card-head"><span class="icon-badge"><svg class="icon"><use href="#i-globe" xlink:href="#i-globe"/></svg></span><h3>Brecha tecnológica</h3></div>
+      <p style="margin:0;">No todas las personas tienen el mismo acceso a la tecnología o las habilidades para usarla. La banca en línea es conveniente, pero ¿qué pasa con adultos mayores o zonas rurales sin conectividad estable? La calidad no debería ser un privilegio, sino un derecho universal.</p>
+    </div>
+
+    <div class="activity-tag">Actividad · Identifica el reto en cada caso</div>
+    <div class="quiz-box" id="quizRetos"></div>
+
+    <div class="footer-nav">
+      <button class="btn btn-outline" onclick="prevPage('retos')">← Anterior</button>
+      <span class="page-count" data-pagecount="retos"></span>
+      <button class="btn" onclick="nextPage('retos')">Siguiente →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-futuro">
+  <div class="page-inner">
+    <span class="eyebrow">Tema 6</span>
+    <h2 class="page-title">El futuro de la calidad: de lo documental a lo inteligente</h2>
+    <p>El futuro de la calidad se caracterizará por sistemas auto-optimizados, predictivos y proactivos, donde la inteligencia artificial y el aprendizaje automático juegan un papel central. La calidad se infundirá en cada capa de la organización, desde el diseño hasta la entrega.</p>
+    <p style="font-size:.85rem;color:var(--ink-soft);">Toca cada tarjeta para descubrir un ejemplo.</p>
+
+    <div class="timeline-track">
+      <div class="tdot"></div><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div>
+    </div>
+    <div class="grid-4">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-front"><svg class="ficon"><use href="#i-wrench" xlink:href="#i-wrench"/></svg><div class="ftitle">Mantenimiento predictivo</div><div class="ftap">Toca para ver más</div></div>
+          <div class="flip-back">Los sensores de un camión de reparto envían datos a un sistema de IA que predice cuándo fallará una pieza, permitiendo reemplazarla antes de que se rompa y evitando retrasos en la entrega.</div>
+        </div>
+      </div>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-front"><svg class="ficon"><use href="#i-sliders" xlink:href="#i-sliders"/></svg><div class="ftitle">Personalización a escala</div><div class="ftap">Toca para ver más</div></div>
+          <div class="flip-back">Adaptar la experiencia de cada usuario de forma individual, aun cuando el producto llega a millones de personas al mismo tiempo.</div>
+        </div>
+      </div>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-front"><svg class="ficon"><use href="#i-radar" xlink:href="#i-radar"/></svg><div class="ftitle">Seguridad en tiempo real</div><div class="ftap">Toca para ver más</div></div>
+          <div class="flip-back">Sistemas que detectan y responden a amenazas mientras ocurren, no después de que el daño ya se hizo.</div>
+        </div>
+      </div>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-front"><svg class="ficon"><use href="#i-clipboard-check" xlink:href="#i-clipboard-check"/></svg><div class="ftitle">Auditorías automatizadas</div><div class="ftap">Toca para ver más</div></div>
+          <div class="flip-back">Revisiones de cumplimiento y calidad ejecutadas de forma continua por software, sin esperar a una inspección puntual.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-nav">
+      <button class="btn btn-outline" onclick="prevPage('futuro')">← Anterior</button>
+      <span class="page-count" data-pagecount="futuro"></span>
+      <button class="btn" onclick="nextPage('futuro')">Siguiente →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-casos">
+  <div class="page-inner">
+    <span class="eyebrow">Tema 7</span>
+    <h2 class="page-title">Casos disruptivos de calidad digital</h2>
+    <p style="font-size:.85rem;color:var(--ink-soft);">Toca cada tarjeta para descubrir cómo cada organización redefinió la calidad en su industria.</p>
+
+    <div class="grid-3" style="margin-bottom:24px;">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-front"><svg class="ficon"><use href="#i-car" xlink:href="#i-car"/></svg><div class="ftitle">Tesla</div><div class="ftap">Toca para ver más</div></div>
+          <div class="flip-back">Calidad de software over-the-air: actualizaciones constantes que mejoran el vehículo durante toda su vida útil. El control de calidad no termina en la fábrica.</div>
+        </div>
+      </div>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-front"><svg class="ficon"><use href="#i-home" xlink:href="#i-home"/></svg><div class="ftitle">Airbnb</div><div class="ftap">Toca para ver más</div></div>
+          <div class="flip-back">Calidad basada en la confianza y las valoraciones de la comunidad, personalización del alojamiento y verificación de anfitriones. Sin hoteles propios, pero con calidad impecable.</div>
+        </div>
+      </div>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-front"><svg class="ficon"><use href="#i-bank" xlink:href="#i-bank"/></svg><div class="ftitle">Fintechs</div><div class="ftap">Toca para ver más</div></div>
+          <div class="flip-back">Velocidad y agilidad en las transacciones, personalización de servicios financieros, seguridad robusta y acceso desde cualquier dispositivo.</div>
+        </div>
+      </div>
+    </div>
+
+    <p>Estos ejemplos demuestran que la calidad ya no es un departamento aislado: es la columna vertebral de la estrategia de negocio y una ventaja competitiva en la era digital.</p>
+
+    <div class="activity-tag">Actividad · Une cada empresa con lo que la define</div>
+    <div class="quiz-box" id="matchCasos"></div>
+
+    <div class="footer-nav">
+      <button class="btn btn-outline" onclick="prevPage('casos')">← Anterior</button>
+      <span class="page-count" data-pagecount="casos"></span>
+      <button class="btn" onclick="nextPage('casos')">Siguiente →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-laboratorio">
+  <div class="page-inner">
+    <span class="eyebrow">Actividad grupal</span>
+    <h2 class="page-title">Laboratorio de innovación en calidad digital</h2>
+    <div class="card card-teal">
+      <div class="card-head"><span class="icon-badge"><svg class="icon"><use href="#i-target" xlink:href="#i-target"/></svg></span><h3>Objetivo</h3></div>
+      <p style="margin:0;">Aplicar los conceptos de transformación digital y calidad, diseñando una propuesta innovadora que redefina cómo se mide y se vive la calidad en una industria tradicional.</p>
+    </div>
+
+    <p style="font-weight:600;">1. Elige una industria para trabajar:</p>
+    <div class="industry-btns" id="industryBtns"></div>
+    <div class="example-box" id="industryExample"></div>
+
+    <label class="field-label">Problema de calidad detectado en tu grupo</label>
+    <textarea id="labProblema" placeholder="Describe el problema que identifican en la industria elegida..."></textarea>
+
+    <label class="field-label">Solución digital propuesta</label>
+    <textarea id="labSolucion" placeholder="¿Qué solución digital innovadora proponen?"></textarea>
+
+    <label class="field-label">Nuevo indicador de calidad digital</label>
+    <textarea id="labIndicador" placeholder="¿Cómo medirían el éxito de su propuesta?"></textarea>
+
+    <div style="margin-top:16px;">
+      <button class="btn" onclick="generarResumenLab()">Generar resumen del grupo</button>
+    </div>
+    <div class="summary-box" id="labSummary"></div>
+
+    <div class="footer-nav">
+      <button class="btn btn-outline" onclick="prevPage('laboratorio')">← Anterior</button>
+      <span class="page-count" data-pagecount="laboratorio"></span>
+      <button class="btn" onclick="nextPage('laboratorio')">Siguiente →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-sintesis">
+  <div class="page-inner">
+    <span class="eyebrow">Cierre</span>
+    <h2 class="page-title">Síntesis de la sesión</h2>
+
+    <div class="card">
+      <p style="margin:0;">La calidad ya no se mide únicamente por el cumplimiento de especificaciones o la ausencia de defectos. Hoy incluye agilidad en los procesos, innovación constante y experiencia del cliente, adaptándose a entornos digitales dinámicos y cambiantes.</p>
+    </div>
+    <div class="card">
+      <p style="margin:0;">La Calidad 4.0 integra tecnologías avanzadas como IoT, analítica de datos, inteligencia artificial y automatización de procesos, y coloca al cliente digital en el centro del diseño, producción y entrega.</p>
+    </div>
+    <div class="card">
+      <p style="margin:0;">La medición se amplía más allá de errores tradicionales: tiempo de respuesta, personalización, experiencia de usuario, velocidad de innovación y confiabilidad de los sistemas digitales son las nuevas métricas.</p>
+    </div>
+    <div class="card card-teal">
+      <p style="margin:0;">El futuro requiere combinar tecnología, ética y cultura organizacional. Los profesionales de calidad deberán gestionar confianza, valor y sostenibilidad, entendiendo que la calidad digital depende tanto de sistemas y herramientas como de decisiones éticas y del compromiso con la experiencia del usuario.</p>
+    </div>
+
+    <div class="activity-tag">Repaso final · Verdadero o falso</div>
+    <div class="quiz-box" id="tfSintesis"></div>
+
+    <div class="footer-nav">
+      <button class="btn btn-outline" onclick="prevPage('sintesis')">← Anterior</button>
+      <span class="page-count" data-pagecount="sintesis"></span>
+      <button class="btn" onclick="nextPage('sintesis')">Siguiente →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-bibliografia">
+  <div class="page-inner">
+    <span class="eyebrow">Referencias</span>
+    <h2 class="page-title">Bibliografía de la sesión</h2>
+
+    <div class="biblio-item"><div class="bnum"><svg class="icon" style="width:15px;height:15px;"><use href="#i-book" xlink:href="#i-book"/></svg></div><div>Briano, C. A. (2024). <i>La transformación digital de los negocios: apuntes conceptuales.</i></div></div>
+    <div class="biblio-item"><div class="bnum"><svg class="icon" style="width:15px;height:15px;"><use href="#i-book" xlink:href="#i-book"/></svg></div><div>Páez-Gabriunas, I., Sanabria, M., Gauthier-Umaña, V., &amp; Méndez-Romero, R. A. (Eds.). (2022). <i>Transformación digital en las organizaciones.</i></div></div>
+    <div class="biblio-item"><div class="bnum"><svg class="icon" style="width:15px;height:15px;"><use href="#i-book" xlink:href="#i-book"/></svg></div><div>Rogers, D. L. (2018). <i>La transformación digital: Reinventa tu negocio para la era digital.</i></div></div>
+    <div class="biblio-item"><div class="bnum"><svg class="icon" style="width:15px;height:15px;"><use href="#i-book" xlink:href="#i-book"/></svg></div><div>Rozas, J. P. (2019). <i>La transformación digital no es digital.</i></div></div>
+
+    <div class="card card-teal center" style="margin-top:24px;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <span class="icon-badge"><svg class="icon"><use href="#i-trophy" xlink:href="#i-trophy"/></svg></span>
+        <h3 style="margin-bottom:0;">¡Sesión completada!</h3>
+      </div>
+      <p style="margin:8px 0 0;font-size:.9rem;">Puedes volver a repasar cualquier tema usando las pestañas de arriba.</p>
+    </div>
+
+    <div class="footer-nav">
+      <button class="btn btn-outline" onclick="prevPage('bibliografia')">← Anterior</button>
+      <span class="page-count" data-pagecount="bibliografia"></span>
+      <button class="btn" onclick="goToPage('intro')">Volver al inicio ↺</button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+/* =========================================================
+   NAVEGACIÓN
+========================================================= */
+const pages = [
+  {id:'intro', label:'Inicio'},
+  {id:'objetivo', label:'Objetivo'},
+  {id:'calidad-digital', label:'Calidad digital'},
+  {id:'evolucion', label:'Evolución'},
+  {id:'pilares', label:'Pilares 4.0'},
+  {id:'indicadores', label:'Indicadores'},
+  {id:'retos', label:'Retos'},
+  {id:'futuro', label:'Futuro'},
+  {id:'casos', label:'Casos'},
+  {id:'laboratorio', label:'Laboratorio'},
+  {id:'sintesis', label:'Síntesis'},
+  {id:'bibliografia', label:'Bibliografía'}
+];
+
+const navTabs = document.getElementById('navTabs');
+pages.forEach((p,i)=>{
+  const btn = document.createElement('button');
+  btn.className = 'nav-tab';
+  btn.textContent = p.label;
+  btn.dataset.page = p.id;
+  btn.addEventListener('click', ()=>goToPage(p.id));
+  navTabs.appendChild(btn);
+});
+
+function goToPage(id){
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(el=>el.classList.remove('active'));
+  const target = document.getElementById('page-'+id);
+  if(target) target.classList.add('active');
+  const tab = document.querySelector('.nav-tab[data-page="'+id+'"]');
+  if(tab) tab.classList.add('active');
+  const idx = pages.findIndex(p=>p.id===id);
+  const pct = ((idx+1)/pages.length)*100;
+  document.getElementById('progressBar').style.width = pct+'%';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function nextPage(currentId){
+  const idx = pages.findIndex(p=>p.id===currentId);
+  if(idx < pages.length-1) goToPage(pages[idx+1].id);
+}
+function prevPage(currentId){
+  const idx = pages.findIndex(p=>p.id===currentId);
+  if(idx > 0) goToPage(pages[idx-1].id);
+}
+function pageCount(currentId){
+  const idx = pages.findIndex(p=>p.id===currentId);
+  return (idx+1)+' de '+pages.length;
+}
+function renderPageCounts(){
+  document.querySelectorAll('[data-pagecount]').forEach(el=>{
+    el.textContent = pageCount(el.dataset.pagecount);
+  });
+}
+
+/* =========================================================
+   COMPONENTE: Preguntas de opción múltiple
+========================================================= */
+function renderQuiz(containerId, questions){
+  const container = document.getElementById(containerId);
+  let score = 0;
+  container.innerHTML = '<span class="quiz-score" id="'+containerId+'-score">Aciertos: 0/'+questions.length+'</span>';
+  questions.forEach((q,qi)=>{
+    const block = document.createElement('div');
+    block.className = 'q-block';
+    const qt = document.createElement('div');
+    qt.className = 'q-text';
+    qt.textContent = (qi+1)+'. '+q.q;
+    block.appendChild(qt);
+    const opts = document.createElement('div');
+    opts.className = 'q-options';
+    const explain = document.createElement('div');
+    explain.className = 'q-explain';
+    explain.textContent = q.explain || '';
+    q.options.forEach((optText, oi)=>{
+      const b = document.createElement('button');
+      b.className = 'q-opt';
+      b.textContent = optText;
+      b.addEventListener('click', ()=>{
+        if(b.dataset.answered) return;
+        Array.from(opts.children).forEach(c=>c.dataset.answered='1');
+        if(oi === q.correct){
+          b.classList.add('correct');
+          score++;
+        } else {
+          b.classList.add('incorrect');
+          opts.children[q.correct].classList.add('correct');
+        }
+        document.getElementById(containerId+'-score').textContent = 'Aciertos: '+score+'/'+questions.length;
+        explain.classList.add('show');
+      });
+      opts.appendChild(b);
+    });
+    block.appendChild(opts);
+    block.appendChild(explain);
+    container.appendChild(block);
+  });
+}
+
+/* =========================================================
+   COMPONENTE: Verdadero / Falso
+========================================================= */
+function renderTF(containerId, items){
+  const container = document.getElementById(containerId);
+  let score = 0;
+  container.innerHTML = '<span class="quiz-score" id="'+containerId+'-score">Aciertos: 0/'+items.length+'</span>';
+  items.forEach((it,ii)=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'tf-item';
+    wrap.style.clear='both';
+    const txt = document.createElement('div');
+    txt.className = 'tf-text';
+    txt.textContent = (ii+1)+'. '+it.text;
+    wrap.appendChild(txt);
+    const btns = document.createElement('div');
+    btns.className = 'tf-btns';
+    const bv = document.createElement('button');
+    bv.className='tf-btn'; bv.textContent='Verdadero';
+    const bf = document.createElement('button');
+    bf.className='tf-btn'; bf.textContent='Falso';
+    const explain = document.createElement('div');
+    explain.className='q-explain';
+    explain.textContent = it.explain || '';
+    function answer(choseTrue, btnChosen, btnOther){
+      if(bv.dataset.answered) return;
+      bv.dataset.answered='1'; bf.dataset.answered='1';
+      const correct = (choseTrue === it.answer);
+      btnChosen.classList.add(correct?'correct':'incorrect');
+      if(!correct){ btnOther.classList.add('correct'); }
+      if(correct) score++;
+      document.getElementById(containerId+'-score').textContent = 'Aciertos: '+score+'/'+items.length;
+      explain.classList.add('show');
+    }
+    bv.addEventListener('click', ()=>answer(true, bv, bf));
+    bf.addEventListener('click', ()=>answer(false, bf, bv));
+    btns.appendChild(bv); btns.appendChild(bf);
+    wrap.appendChild(btns);
+    wrap.appendChild(explain);
+    container.appendChild(wrap);
+  });
+}
+
+/* =========================================================
+   COMPONENTE: Clasificar (Sort A vs B)
+========================================================= */
+function renderSort(containerId, items, labelA, labelB){
+  const container = document.getElementById(containerId);
+  let score = 0;
+  container.innerHTML = '<span class="quiz-score" id="'+containerId+'-score">Aciertos: 0/'+items.length+'</span>';
+  items.forEach((it,ii)=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'sort-item';
+    wrap.style.clear='both';
+    const txt = document.createElement('div');
+    txt.className='sort-text';
+    txt.textContent = it.text;
+    wrap.appendChild(txt);
+    const btns = document.createElement('div');
+    btns.className='sort-btns';
+    const ba = document.createElement('button');
+    ba.className='sort-btn'; ba.textContent=labelA;
+    const bb = document.createElement('button');
+    bb.className='sort-btn'; bb.textContent=labelB;
+    function answer(choice, btnChosen, btnOther){
+      if(wrap.classList.contains('done')) return;
+      wrap.classList.add('done');
+      ba.disabled=true; bb.disabled=true;
+      const correct = (choice === it.category);
+      btnChosen.classList.add(correct?'correct':'incorrect');
+      if(!correct){ btnOther.classList.add('correct'); }
+      if(correct) score++;
+      document.getElementById(containerId+'-score').textContent = 'Aciertos: '+score+'/'+items.length;
+    }
+    ba.addEventListener('click', ()=>answer('a', ba, bb));
+    bb.addEventListener('click', ()=>answer('b', bb, ba));
+    btns.appendChild(ba); btns.appendChild(bb);
+    wrap.appendChild(btns);
+    container.appendChild(wrap);
+  });
+}
+
+/* =========================================================
+   COMPONENTE: Emparejar (matching)
+========================================================= */
+function renderMatch(containerId, pairs){
+  const container = document.getElementById(containerId);
+  let score = 0;
+  const total = pairs.length;
+  container.innerHTML = '<span class="quiz-score" id="'+containerId+'-score">Aciertos: 0/'+total+'</span><div class="match-wrap"><div class="match-col" id="'+containerId+'-left"></div><div class="match-col" id="'+containerId+'-right"></div></div>';
+  const leftCol = document.getElementById(containerId+'-left');
+  const rightCol = document.getElementById(containerId+'-right');
+  const rightShuffled = pairs.map((p,i)=>({text:p.right, id:i})).sort(()=>Math.random()-0.5);
+  let selectedLeft = null;
+  const leftBtns = {}, rightBtns = {};
+  pairs.forEach((p,i)=>{
+    const b = document.createElement('button');
+    b.className='match-item';
+    b.textContent = p.left;
+    b.addEventListener('click', ()=>{
+      if(b.classList.contains('correct')) return;
+      Object.values(leftBtns).forEach(x=>x.classList.remove('selected'));
+      b.classList.add('selected');
+      selectedLeft = i;
+    });
+    leftBtns[i]=b;
+    leftCol.appendChild(b);
+  });
+  rightShuffled.forEach(r=>{
+    const b = document.createElement('button');
+    b.className='match-item';
+    b.textContent = r.text;
+    b.addEventListener('click', ()=>{
+      if(selectedLeft===null || b.classList.contains('correct')) return;
+      if(r.id === selectedLeft){
+        b.classList.add('correct');
+        leftBtns[selectedLeft].classList.add('correct');
+        leftBtns[selectedLeft].classList.remove('selected');
+        b.disabled = true;
+        leftBtns[selectedLeft].disabled = true;
+        score++;
+        document.getElementById(containerId+'-score').textContent = 'Aciertos: '+score+'/'+total;
+        selectedLeft = null;
+      } else {
+        b.classList.add('wrong');
+        setTimeout(()=>b.classList.remove('wrong'),350);
+      }
+    });
+    rightBtns[r.id]=b;
+    rightCol.appendChild(b);
+  });
+}
+
+/* =========================================================
+   COMPONENTE: Flip cards (activadas por clic)
+========================================================= */
+function initFlipCards(){
+  document.querySelectorAll('.flip-card').forEach(card=>{
+    card.addEventListener('click', ()=>card.classList.toggle('flipped'));
+  });
+}
+
+/* =========================================================
+   COMPONENTE: Checklist de objetivos
+========================================================= */
+function initObjChecks(){
+  document.querySelectorAll('.obj-check').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      el.classList.toggle('checked');
+      const box = el.querySelector('.obj-box');
+      box.textContent = el.classList.contains('checked') ? '✓' : '';
+    });
+  });
+}
+
+/* =========================================================
+   COMPONENTE: Agenda clicable (página de inicio)
+========================================================= */
+const agendaItems = [
+  {n:1, label:'¿Qué significa calidad en la era digital?', page:'calidad-digital'},
+  {n:2, label:'De la Calidad Clásica a la Calidad 4.0', page:'evolucion'},
+  {n:3, label:'Pilares de la Calidad 4.0', page:'pilares'},
+  {n:4, label:'Nuevos indicadores de calidad en entornos digitales', page:'indicadores'},
+  {n:5, label:'Retos y dilemas de la calidad digital', page:'retos'},
+  {n:6, label:'Futuro de la calidad', page:'futuro'},
+  {n:7, label:'Casos disruptivos', page:'casos'},
+  {n:8, label:'Laboratorio de innovación en calidad digital', page:'laboratorio'},
+  {n:9, label:'Síntesis de la sesión', page:'sintesis'},
+  {n:10, label:'Bibliografía', page:'bibliografia'}
+];
+function renderAgenda(){
+  const list = document.getElementById('agendaList');
+  agendaItems.forEach(item=>{
+    const b = document.createElement('button');
+    b.className = 'agenda-card';
+    b.innerHTML = '<span class="anum">'+item.n+'</span><span>'+item.label+'</span>';
+    b.addEventListener('click', ()=>goToPage(item.page));
+    list.appendChild(b);
+  });
+}
+
+/* =========================================================
+   DATOS DE LAS ACTIVIDADES INTERACTIVAS
+========================================================= */
+const pairsCalidad = [
+  {left:'Experiencia del usuario (UX)', right:'Que la interacción con el producto o servicio sea intuitiva, fluida y satisfactoria.'},
+  {left:'Agilidad y adaptabilidad', right:'Capacidad de lanzar mejoras constantes y responder rápido a la retroalimentación.'},
+  {left:'Seguridad y privacidad de datos', right:'Proteger la información del usuario; sin esto no hay calidad posible.'},
+  {left:'Automatización e IA', right:'Garantizar consistencia y eficiencia en la entrega continua de valor.'}
+];
+
+const itemsEvolucion = [
+  {text:'Se inspecciona el producto al final de la línea de producción para encontrar defectos.', category:'a'},
+  {text:'Los datos en tiempo real predicen fallas antes de que ocurran.', category:'b'},
+  {text:'El proceso es jerárquico y depende de muchos documentos formales.', category:'a'},
+  {text:'Equipos ágiles y multifuncionales ajustan el producto según el feedback del usuario.', category:'b'},
+  {text:'El objetivo principal es cumplir estrictamente una norma ISO o Six Sigma.', category:'a'},
+  {text:'Se usan IoT, IA y automatización para optimizar la calidad de forma continua.', category:'b'}
+];
+
+const qPilares = [
+  {q:'Una fábrica usa sensores que corrigen automáticamente un proceso fuera de parámetro. ¿Qué pilar aplica?',
+   options:['Ciberseguridad integrada','Automatización inteligente','Cultura de la agilidad','Análisis de Big Data'],
+   correct:1, explain:'La automatización inteligente usa IA y robótica para controlar y corregir procesos en tiempo real.'},
+  {q:'Un banco sufre el robo de datos de tarjetas de crédito de sus clientes. ¿Qué pilar falló?',
+   options:['Análisis de Big Data','Cultura de la agilidad','Ciberseguridad integrada','Automatización inteligente'],
+   correct:2, explain:'La protección de datos y sistemas es un pilar fundamental: un fallo de seguridad es un fallo de calidad.'},
+  {q:'Un equipo multifuncional lanza una nueva función cada dos semanas según el feedback de los usuarios. ¿Qué pilar representa esto?',
+   options:['Cultura de la agilidad','Ciberseguridad integrada','Análisis de Big Data','Automatización inteligente'],
+   correct:0, explain:'La agilidad es la capacidad de adaptarse rápido a los cambios del mercado y del cliente.'}
+];
+
+const pairsIndicadores = [
+  {left:'Velocidad', right:'Tiempo que tarda una página en cargar o un pedido en procesarse.'},
+  {left:'Personalización', right:'Recomendaciones de Netflix ajustadas a cada usuario.'},
+  {left:'Experiencia', right:'Facilidad de uso y Net Promoter Score (NPS).'},
+  {left:'Seguridad', right:'Cumplimiento del GDPR y ausencia de vulnerabilidades.'}
+];
+
+const qRetos = [
+  {q:'Un algoritmo de un banco niega préstamos con más frecuencia a un grupo específico, sin explicación clara. ¿Qué reto ilustra este caso?',
+   options:['Brecha tecnológica','Ética de la inteligencia artificial','Ciberseguridad','Ninguno de los anteriores'],
+   correct:1, explain:'Los algoritmos pueden arrastrar sesgos; surge la pregunta de quién es responsable y cómo garantizar transparencia.'},
+  {q:'Un adulto mayor en una zona rural no puede acceder a la banca en línea por falta de conectividad estable. ¿Qué reto refleja esto?',
+   options:['Ética de la IA','Ciberseguridad','Brecha tecnológica','Automatización'],
+   correct:2, explain:'No todas las personas tienen el mismo acceso a la tecnología o las habilidades para usarla.'},
+  {q:'Los ataques informáticos se vuelven más sofisticados a medida que avanza la tecnología. ¿Qué reto describe esto?',
+   options:['Ciberseguridad','Brecha tecnológica','Ética de la IA','Personalización'],
+   correct:0, explain:'Esto exige inversión constante en protección y una cultura de seguridad dentro de la organización.'}
+];
+
+const pairsCasos = [
+  {left:'Tesla', right:'Actualizaciones de software over-the-air (OTA) durante toda la vida útil del vehículo.'},
+  {left:'Airbnb', right:'Confianza y valoraciones de la comunidad como base de la calidad percibida.'},
+  {left:'Fintechs', right:'Velocidad, seguridad y personalización en cada transacción financiera.'}
+];
+
+const tfItems = [
+  {text:'La calidad hoy se mide únicamente por la ausencia de defectos.', answer:false, explain:'Hoy también incluye agilidad, innovación y experiencia del cliente.'},
+  {text:'La Calidad 4.0 integra tecnologías como IoT, IA y automatización.', answer:true, explain:'Estas tecnologías permiten una gestión de calidad más inteligente y predictiva.'},
+  {text:'El Net Promoter Score (NPS) es un indicador relacionado con la experiencia del cliente.', answer:true, explain:'El NPS mide la probabilidad de que un cliente recomiende el producto o servicio.'},
+  {text:'La ciberseguridad es un aspecto secundario dentro de la calidad digital.', answer:false, explain:'Es uno de los pilares fundamentales: un fallo de seguridad es un fallo de calidad.'},
+  {text:'Empresas como Tesla y Airbnb redefinieron la calidad usando actualizaciones constantes, confianza y experiencia integral.', answer:true, explain:'Ambas priorizan la experiencia continua por sobre el control tradicional de defectos.'}
+];
+
+/* =========================================================
+   LABORATORIO DE INNOVACIÓN (worksheet)
+========================================================= */
+const industries = [
+  {id:'salud', label:'Salud', icon:'i-cross', problema:'Largas filas y tiempos de espera para conseguir una cita médica.', solucion:'Apps para agendar citas médicas y ver el tiempo de espera en tiempo real.', indicador:'Tiempo promedio de espera del paciente.'},
+  {id:'educacion', label:'Educación', icon:'i-cap', problema:'Mala experiencia de usuario en la educación en línea.', solucion:'Uso de realidad virtual para mejorar la experiencia de aprendizaje.', indicador:'Nivel de personalización de la experiencia de aprendizaje.'},
+  {id:'logistica', label:'Logística', icon:'i-truck', problema:'Retrasos frecuentes en las entregas.', solucion:'Plataformas de seguimiento en tiempo real y optimización de rutas con IA.', indicador:'Porcentaje de entregas realizadas a tiempo.'},
+  {id:'alimentacion', label:'Alimentación', icon:'i-leaf', problema:'Falta de trazabilidad en la cadena alimentaria.', solucion:'Blockchain para la trazabilidad de alimentos.', indicador:'Porcentaje de trazabilidad en la cadena.'}
+];
+let selectedIndustry = null;
+function initLab(){
+  const wrap = document.getElementById('industryBtns');
+  industries.forEach(ind=>{
+    const b = document.createElement('button');
+    b.className = 'industry-btn';
+    b.innerHTML = '<svg class="icon" style="width:16px;height:16px;margin-right:6px;"><use href="#'+ind.icon+'" xlink:href="#'+ind.icon+'"/></svg>'+ind.label;
+    b.addEventListener('click', ()=>{
+      document.querySelectorAll('.industry-btn').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      selectedIndustry = ind;
+      document.getElementById('industryExample').innerHTML =
+        '<b>Ejemplo del sector '+ind.label+':</b><br>Problema típico: '+ind.problema+'<br>Solución digital de referencia: '+ind.solucion+'<br>Indicador de referencia: '+ind.indicador;
+    });
+    wrap.appendChild(b);
+  });
+  // selección inicial
+  wrap.children[0].click();
+}
+function generarResumenLab(){
+  const p = document.getElementById('labProblema').value.trim();
+  const s = document.getElementById('labSolucion').value.trim();
+  const i = document.getElementById('labIndicador').value.trim();
+  const box = document.getElementById('labSummary');
+  if(!p || !s || !i){
+    box.style.display='block';
+    box.textContent = 'Completa los tres campos (problema, solución e indicador) antes de generar el resumen.';
+    return;
+  }
+  const industriaLabel = selectedIndustry ? selectedIndustry.label : '(sin definir)';
+  box.style.display='block';
+  box.textContent =
+    'RESUMEN DE LA PROPUESTA\n'+
+    'Industria: '+industriaLabel+'\n\n'+
+    'Problema detectado:\n'+p+'\n\n'+
+    'Solución digital propuesta:\n'+s+'\n\n'+
+    'Nuevo indicador de calidad digital:\n'+i;
+}
+
+/* =========================================================
+   INIT GENERAL (se llama al final, luego de insertar las páginas)
+========================================================= */
+function initAll(){
+  goToPage('intro');
+  renderPageCounts();
+  initFlipCards();
+  initObjChecks();
+  renderAgenda();
+  renderMatch('matchCalidad', pairsCalidad);
+  renderSort('sortEvolucion', itemsEvolucion, 'Calidad Clásica', 'Calidad 4.0');
+  renderQuiz('quizPilares', qPilares);
+  renderMatch('matchIndicadores', pairsIndicadores);
+  renderQuiz('quizRetos', qRetos);
+  renderMatch('matchCasos', pairsCasos);
+  renderTF('tfSintesis', tfItems);
+  initLab();
+}
+initAll();
+</script>
+</body>
+</html>
